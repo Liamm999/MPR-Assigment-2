@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="350dp"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:layout_margin="5dp"
+    android:id="@+id/item_layout"
+    >
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/product"
+        android:src="@drawable/loading_icon"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:background="@drawable/cart_border_vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="heloooo"
+            android:maxLines="2"
+            android:paddingHorizontal="5dp"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="30dp"
+            android:ellipsize="end"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tv_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:textColor="@color/green_mist"
+                />
+
+            <!-- spacing -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <ImageButton
+                android:id="@+id/add_cart_btn"
+                android:background="@drawable/cart_green"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="Add to cart" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

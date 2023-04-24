@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_layout_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:gravity="start"
+    android:weightSum="7"
+    android:padding="3dp"
+    android:orientation="horizontal"
+    android:background="@drawable/cart_border"
+    >
+
+    <ImageView
+        android:id="@+id/iv_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/product"
+        android:scaleType="centerCrop"
+        android:src="@drawable/loading_icon" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_name_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="hedsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdloooo"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- spacing -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_item_price_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="VND 169000"
+            android:textColor="@color/green_mist"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <!--     spacing -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:paddingVertical="1dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_add_horizontal"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_border"
+            android:contentDescription="TODO"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus" />
+
+        <!-- spacing -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/amount_items_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="@color/Tusk"
+            android:textSize="20sp" />
+
+        <!-- spacing -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_minus_horizontal"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_border"
+            android:contentDescription="TODO"
+            android:scaleType="fitCenter"
+            android:src="@drawable/minus" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/total_cost_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:text="VND 500000"
+        android:textColor="@color/Tusk"
+        android:textSize="15sp"
+        android:maxLines="2"
+        android:gravity="center_vertical|center_horizontal"
+        />
+
+</LinearLayout>
