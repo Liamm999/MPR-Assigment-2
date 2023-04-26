@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 // on below line we are adding the data from cursor to our array list.
                 Product tempProduct = (new Product(
-                        cursorCourses.getInt(0),
+                        cursorCourses.getLong(0),
                         cursorCourses.getString(1),
                         cursorCourses.getString(2),
                         "",
@@ -129,7 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update("mycart", values, "id=?", new String[]{String.valueOf(id)});
     }
 
-    public Integer deleteItem(int id) {
+    public Integer deleteItem(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(id)});
     }

@@ -3,14 +3,14 @@ package hanu.a2_2001040108.mycart.model;
 import hanu.a2_2001040108.mycart.Helper.MoneyFormatter;
 
 public class Product {
-    private final int id;
+    private final long id;
     private String thumbnail;
     private String name;
     private String category;
     private int unitPrice;
     private int amount = 0;
 
-    public Product(int id, String thumbnail, String name, String category, int unitPrice) {
+    public Product(long id, String thumbnail, String name, String category, int unitPrice) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.name = name;
@@ -18,7 +18,7 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 

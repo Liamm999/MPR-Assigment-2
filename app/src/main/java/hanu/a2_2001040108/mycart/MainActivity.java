@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,29 +19,36 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import hanu.a2_2001040108.mycart.Helper.FetchData;
 import hanu.a2_2001040108.mycart.Helper.ICartRecycler;
 import hanu.a2_2001040108.mycart.Helper.ImageHandler;
-import hanu.a2_2001040108.mycart.Helper.JSONPlaceholder;
 import hanu.a2_2001040108.mycart.adapter.ProductAdapter;
 import hanu.a2_2001040108.mycart.model.Product;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+//import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity implements ICartRecycler {
     private RecyclerView rcv;
     private SearchView sv;
     private LinearLayout loading;
+    private FetchData fetchData;
     private List<Product> products;
 
     @Override
@@ -50,10 +58,13 @@ public class MainActivity extends AppCompatActivity implements ICartRecycler {
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getColor(R.color.light_green)));
         getView();
         sv.setQueryHint("Search");
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         // load products
         products = new ArrayList<>();
-        loadProducts();
+        setProductsToAdapter();
+        this.products = fetchData.getProducts();
 
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -75,40 +86,9 @@ public class MainActivity extends AppCompatActivity implements ICartRecycler {
         sv = findViewById(R.id.sv);
     }
 
-    private void loadProducts() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://hanu-congnv.github.io/mpr-cart-api/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
-        Call<List<Product>> call = jsonPlaceholder.getProducts();
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                Handler handler = new Handler(Looper.getMainLooper());
-
-                if (response.isSuccessful()) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            loading.setVisibility(View.GONE);
-                            sv.setVisibility(View.VISIBLE);
-                            List<Product> productList = response.body();
-                            assert productList != null;
-                            products.addAll(productList);
-                            ProductAdapter productAdapter = new ProductAdapter(products, MainActivity.this);
-                            rcv.setAdapter(productAdapter);
-                            rcv.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                        }
-                    }, 5000);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void setProductsToAdapter() {
+        fetchData = new FetchData(MainActivity.this, MainActivity.this);
+        fetchData.execute();
     }
 
     // TODO: filter products
@@ -137,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements ICartRecycler {
         menuInflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     // TODO: switch screen when click to cart button on header

@@ -31,16 +31,11 @@ import java.util.concurrent.Executors;
 import hanu.a2_2001040108.mycart.Helper.DBHelper;
 import hanu.a2_2001040108.mycart.Helper.ICartRecycler;
 import hanu.a2_2001040108.mycart.Helper.ImageHandler;
-import hanu.a2_2001040108.mycart.Helper.JSONPlaceholder;
 import hanu.a2_2001040108.mycart.Helper.MoneyFormatter;
 import hanu.a2_2001040108.mycart.adapter.CartProductAdapter;
 import hanu.a2_2001040108.mycart.adapter.ProductAdapter;
 import hanu.a2_2001040108.mycart.model.Product;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 
 @SuppressLint("CustomSplashScreen")
@@ -88,8 +83,6 @@ public class CartActivity extends AppCompatActivity implements ICartRecycler {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     @SuppressLint("SetTextI18n")
     @Override
